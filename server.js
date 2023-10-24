@@ -20,8 +20,8 @@ server.use(middlewares);
 // Add this before server.use(router)
 server.use(
   jsonServer.rewriter({
-    "/auth/login?username=:username&password=:password":
-      "/users?username=:username&password=:password",
+    "/auth/login?email=:email&password=:password":
+      "/users?email=:email&password=:password",
     "/auth/user/:id": "/users/:id",
   })
 );
