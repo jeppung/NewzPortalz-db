@@ -1,5 +1,6 @@
 // See https://github.com/typicode/json-server#module
 const jsonServer = require("json-server");
+const https = require("https")
 
 const server = jsonServer.create();
 
@@ -26,8 +27,17 @@ server.use(
   })
 );
 
-http: server.use(router);
-server.listen(8000, () => {
+server.use(router);
+
+
+const keyFile = path.join(__dirname, 'server.key');
+const certFile = path.join(__dirname, 'server.cert');
+
+
+https.createServer({
+    key: fs.readFileSync(keyFile),
+    cert: fs.readFileSync(certFile)
+}, server).listen(8000, () => {
   console.log("JSON Server is running");
 });
 
